@@ -101,11 +101,12 @@
         </div>
     </div>
 
-    {{-- FORM HAPUS MASSAL --}}
+    
     <form id="formHapusMassal"
-          action="{{ url('/pelanggan-admin/hapus-massal') }}"
-          method="POST">
+        action="{{ url('/pelanggan-admin/hapus-massal') }}"
+        method="POST">
         @csrf
+        @method('DELETE')
     </form>
 
     {{-- TABEL PELANGGAN --}}
