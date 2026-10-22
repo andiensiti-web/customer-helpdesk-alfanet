@@ -1,0 +1,519 @@
+@extends('layouts.app')
+
+@section('content')
+
+<div class="w-full space-y-6">
+
+
+    {{-- HEADER --}}
+    <div>
+        <h1 class="text-3xl font-bold text-gray-800">
+            Laporan Keuangan
+        </h1>
+
+        <p class="text-gray-500 mt-1">
+            Rekap pembayaran dan pendapatan Alfa Net
+        </p>
+    </div>
+
+    {{-- FILTER --}}
+
+<div class="bg-white rounded-xl shadow-sm p-5">
+
+    <form id="filterLaporan"
+          method="GET"
+          action="{{ url('/laporan-keuangan') }}">
+
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+
+
+            {{-- BULAN --}}
+            <select
+                name="bulan"
+                class="border rounded-lg px-4 py-3">
+
+
+                <option value="">
+                    Semua Bulan
+                </option>
+
+
+                <option value="1"
+                    {{ request('bulan') == '1' ? 'selected' : '' }}>
+                    Januari
+                </option>
+
+
+                <option value="2"
+                    {{ request('bulan') == '2' ? 'selected' : '' }}>
+                    Februari
+                </option>
+
+
+                <option value="3"
+                    {{ request('bulan') == '3' ? 'selected' : '' }}>
+                    Maret
+                </option>
+
+
+                <option value="4"
+                    {{ request('bulan') == '4' ? 'selected' : '' }}>
+                    April
+                </option>
+
+
+                <option value="5"
+                    {{ request('bulan') == '5' ? 'selected' : '' }}>
+                    Mei
+                </option>
+
+
+                <option value="6"
+                    {{ request('bulan') == '6' ? 'selected' : '' }}>
+                    Juni
+                </option>
+
+
+                <option value="7"
+                    {{ request('bulan') == '7' ? 'selected' : '' }}>
+                    Juli
+                </option>
+
+
+                <option value="8"
+                    {{ request('bulan') == '8' ? 'selected' : '' }}>
+                    Agustus
+                </option>
+
+
+                <option value="9"
+                    {{ request('bulan') == '9' ? 'selected' : '' }}>
+                    September
+                </option>
+
+
+                <option value="10"
+                    {{ request('bulan') == '10' ? 'selected' : '' }}>
+                    Oktober
+                </option>
+
+
+                <option value="11"
+                    {{ request('bulan') == '11' ? 'selected' : '' }}>
+                    November
+                </option>
+
+
+                <option value="12"
+                    {{ request('bulan') == '12' ? 'selected' : '' }}>
+                    Desember
+                </option>
+
+
+            </select>
+
+
+
+
+            {{-- SEARCH --}}
+            <input
+                type="text"
+                name="search"
+                value="{{ request('search') }}"
+                placeholder="Cari pembayaran..."
+                class="border rounded-lg px-4 py-3">
+
+            {{-- EXPORT PDF --}}
+            <a href="{{ route('laporan-pdf', ['bulan' => request('bulan')]) }}"
+                class="bg-blue-600 text-white px-5 py-3 rounded-lg flex items-center gap-2">
+                <i data-lucide="download" class="w-5 h-5"></i>
+                Export PDF
+                </a>
+
+
+        </div>
+
+
+    </form>
+
+
+</div>
+
+    {{-- STATISTIK --}}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+
+        <div class="bg-blue-50 rounded-xl p-5 flex gap-4">
+
+            <div class="bg-blue-100 p-3 rounded-lg">
+
+                <i data-lucide="file-text"
+                   class="text-blue-600">
+                </i>
+
+            </div>
+
+
+            <div>
+
+                <p class="text-gray-500 text-sm">
+                    Total Tagihan
+                </p>
+
+                <h2 class="text-2xl font-bold">
+                    Rp{{ number_format($totalTagihan,0,',','.') }}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+
+
+        <div class="bg-green-50 rounded-xl p-5 flex gap-4">
+
+            <div class="bg-green-100 p-3 rounded-lg">
+
+                <i data-lucide="check-circle"
+                   class="text-green-600">
+                </i>
+
+            </div>
+
+
+            <div>
+
+                <p class="text-gray-500 text-sm">
+                    Pembayaran Berhasil
+                </p>
+
+                <h2 class="text-2xl font-bold">
+                    {{ $totalPembayaran }}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+
+
+        <div class="bg-purple-50 rounded-xl p-5 flex gap-4">
+
+            <div class="bg-purple-100 p-3 rounded-lg">
+
+                <i data-lucide="trending-up"
+                   class="text-purple-600">
+                </i>
+
+            </div>
+
+
+            <div>
+
+                <p class="text-gray-500 text-sm">
+                    Pendapatan
+                </p>
+
+                <h2 class="text-2xl font-bold">
+                    Rp{{ number_format($pendapatan,0,',','.') }}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+    {{-- CONTENT --}}
+    <div class="bg-white rounded-xl shadow-sm p-5">
+
+
+        {{-- TAB --}}
+        <div class="flex gap-8 border-b mb-5">
+
+
+            <a href="/laporan-admin"
+               class="pb-3 text-gray-600">
+
+                Semua Laporan
+
+            </a>
+
+
+            <a href="/laporan-menunggu"
+               class="pb-3 text-gray-600">
+
+                Menunggu Approval
+
+            </a>
+
+
+            <a href="/laporan-disetujui"
+               class="pb-3 text-gray-600">
+
+                Disetujui
+
+            </a>
+
+
+            <a href="/laporan-ditolak"
+               class="pb-3 text-gray-600">
+
+                Ditolak
+
+            </a>
+
+
+            <a href="/laporan-keuangan"
+               class="pb-3 border-b-2 border-blue-600 text-blue-600">
+
+                Laporan Keuangan
+
+            </a>
+
+
+        </div>
+
+
+
+
+
+        <div class="flex justify-between items-center mb-5">
+
+            <h2 class="text-xl font-semibold">
+                Riwayat Pembayaran
+            </h2>
+            
+        </div>
+
+
+
+
+
+
+        {{-- TABLE --}}
+        <div class="overflow-x-auto">
+
+            <table class="w-full text-sm">
+
+
+                <thead>
+
+                <tr class="border-b text-gray-600">
+
+
+                    <th class="text-left py-3 px-2">
+                        No
+                    </th>
+
+
+                    <th class="text-left py-3 px-2">
+                        Pelanggan
+                    </th>
+
+
+                    <th class="text-left py-3 px-2">
+                        Tanggal
+                    </th>
+
+
+                    <th class="text-left py-3 px-2">
+                        Jumlah
+                    </th>
+
+
+                    <th class="text-left py-3 px-2">
+                        Status
+                    </th>
+
+
+                    <th class="text-left py-3 px-2">
+                        Aksi
+                    </th>
+
+
+                </tr>
+
+                </thead>
+
+
+
+
+
+                <tbody>
+
+
+                @forelse($pembayaran as $data)
+
+
+                <tr class="border-b">
+
+
+                    <td class="py-4 px-2">
+
+                        {{ $loop->iteration }}
+
+                    </td>
+
+
+
+                    <td class="py-4 px-2">
+
+                        {{ $data->pelanggan?->user?->name ?? '-' }}
+
+                    </td>
+
+
+
+                    <td class="py-4 px-2">
+
+                        {{ $data->created_at->format('d F Y') }}
+
+                    </td>
+
+
+
+                    <td class="py-4 px-2 font-semibold">
+
+                        Rp{{ number_format($data->jumlah,0,',','.') }}
+
+                    </td>
+
+
+
+
+                    <td class="py-4 px-2">
+
+
+                        @if($data->status == 'menunggu_verifikasi')
+
+                            <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full">
+                                Menunggu
+                            </span>
+
+
+                        @elseif($data->status == 'terverifikasi')
+
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full">
+                                Berhasil
+                            </span>
+
+
+                        @elseif($data->status == 'ditolak')
+
+                            <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full">
+                                Ditolak
+                            </span>
+
+                        @endif
+
+
+                    </td>
+                   <td class="py-4 px-3">
+                    <div class="flex items-center gap-4">
+                        {{-- DETAIL PEMBAYARAN --}}
+                        <a href="{{ url('/detail-pembayaran-admin/'.$data->id.'?from=keuangan') }}"
+                        title="Detail Pembayaran"
+                        class="text-blue-600 hover:text-blue-800">
+
+                            <i data-lucide="eye"
+                            class="w-5 h-5"></i>
+
+                        </a>
+
+                        {{-- PRINT PEMBAYARAN --}}
+                        <a href="{{ url('/print-pembayaran/'.$data->id) }}"
+                        target="_blank"
+                        class="text-gray-600">
+                            <i data-lucide="printer"
+                            class="w-5 h-5">
+                            </i>
+                        </a>
+                    </div>
+                </td>
+
+                </tr>
+
+                @empty
+
+
+                <tr>
+
+                    <td colspan="6"
+                        class="text-center py-10 text-gray-500">
+
+                        Belum ada transaksi pembayaran.
+
+                    </td>
+
+                </tr>
+
+
+                @endforelse
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+
+
+
+        @if($pembayaran->hasPages())
+
+        <div class="mt-5">
+
+            {{ $pembayaran->links() }}
+
+        </div>
+
+        @endif
+
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+    if(window.lucide){
+        lucide.createIcons();
+    }
+    const bulan =
+        document.querySelector('select[name="bulan"]');
+    if(bulan){
+        bulan.addEventListener('change', function(){
+            this.form.submit();
+        });
+    }
+    const search =
+        document.querySelector('input[name="search"]');
+    if(search){
+        search.addEventListener('keypress', function(e){
+            if(e.key === 'Enter'){
+                e.preventDefault();
+                this.form.submit();
+            }
+        });
+    }
+});
+</script>
+
+
+@endsection

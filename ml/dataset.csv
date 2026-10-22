@@ -1,0 +1,51 @@
+jenis_gangguan,deskripsi,prioritas
+Internet Mati,Internet mati total sejak pagi,tinggi
+Internet Mati,Internet tidak bisa digunakan sama sekali,tinggi
+Internet Mati,Semua perangkat tidak mendapatkan koneksi internet,tinggi
+Internet Mati,Koneksi internet mati sejak tadi malam,tinggi
+Internet Mati,Modem menyala tetapi internet tidak terhubung,tinggi
+Internet Mati,Internet tiba tiba mati dan tidak bisa digunakan,tinggi
+Internet Mati,Lampu internet pada modem mati,tinggi
+Internet Mati,Tidak ada koneksi internet di rumah,tinggi
+Koneksi Lambat,Internet sangat lambat saat digunakan,sedang
+Koneksi Lambat,Kecepatan internet turun sejak kemarin,sedang
+Koneksi Lambat,Internet lambat ketika digunakan untuk browsing,sedang
+Koneksi Lambat,Internet terasa lambat pada semua perangkat,sedang
+Koneksi Lambat,Kecepatan download sangat rendah,sedang
+Koneksi Lambat,Internet lambat terutama pada malam hari,sedang
+Koneksi Lambat,Koneksi internet tidak secepat biasanya,sedang
+Koneksi Lambat,Internet masih bisa digunakan tetapi sangat lambat,sedang
+WiFi Putus,WiFi sering terputus beberapa kali,sedang
+WiFi Putus,Koneksi WiFi kadang terputus sendiri,sedang
+WiFi Putus,WiFi terputus lalu tersambung kembali,sedang
+WiFi Putus,Koneksi WiFi tidak stabil,sedang
+WiFi Putus,WiFi sering disconnect saat digunakan,sedang
+WiFi Putus,Perangkat sering kehilangan koneksi WiFi,sedang
+WiFi Putus,WiFi terputus setiap beberapa menit,sedang
+WiFi Putus,Koneksi WiFi sering hilang sementara,sedang
+Modem Bermasalah,Modem tidak menyala,tinggi
+Modem Bermasalah,Modem mati dan tidak bisa dinyalakan,tinggi
+Modem Bermasalah,Lampu indikator modem berkedip tidak normal,tinggi
+Modem Bermasalah,Modem mengalami restart sendiri,sedang
+Modem Bermasalah,Modem sering mati sendiri,tinggi
+Modem Bermasalah,Modem terasa panas dan koneksi terganggu,sedang
+Password WiFi,Lupa password WiFi,rendah
+Password WiFi,Ingin mengganti password WiFi,rendah
+Password WiFi,Tidak mengetahui password WiFi,rendah
+Password WiFi,Minta bantuan untuk mengganti password,rendah
+Password WiFi,Ingin mengubah nama dan password WiFi,rendah
+Informasi,Ingin mengetahui informasi paket internet,rendah
+Informasi,Ingin bertanya mengenai paket yang tersedia,rendah
+Informasi,Ingin mengetahui cara menggunakan WiFi,rendah
+Informasi,Ingin mengetahui biaya pemasangan internet,rendah
+Informasi,Ingin bertanya mengenai layanan internet,rendah
+Koneksi Tidak Stabil,Internet kadang cepat dan kadang lambat,sedang
+Koneksi Tidak Stabil,Koneksi internet tidak stabil sepanjang hari,sedang
+Koneksi Tidak Stabil,Internet sering mengalami gangguan sementara,sedang
+Koneksi Tidak Stabil,Koneksi sering berubah ubah,sedang
+Koneksi Tidak Stabil,Internet kadang terhubung dan kadang tidak,sedang
+Perangkat Tidak Terhubung,HP tidak bisa terhubung ke WiFi,rendah
+Perangkat Tidak Terhubung,Laptop tidak bisa tersambung ke WiFi,rendah
+Perangkat Tidak Terhubung,Perangkat tertentu tidak mendapatkan koneksi,rendah
+Perangkat Tidak Terhubung,Satu perangkat tidak bisa masuk ke jaringan WiFi,rendah
+Perangkat Tidak Terhubung,HP tidak mendapatkan alamat jaringan,rendah
